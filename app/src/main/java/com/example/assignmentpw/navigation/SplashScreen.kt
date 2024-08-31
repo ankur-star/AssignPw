@@ -50,25 +50,22 @@ import kotlinx.coroutines.delay
 fun BannerScreen(navController: NavHostController) {
     val modifier = Modifier
     Box(modifier = modifier.fillMaxSize()) {
-      /*  Image(
-            painter = painterResource(id = R.drawable.rick_and_morty_logo), contentDescription = "",
-            modifier.fillMaxSize(), contentScale = ContentScale.Fit
-        )*/
+
         val scale = remember { mutableStateOf(0f) }
         val animatedScale = animateFloatAsState(targetValue = scale.value)
 
         LaunchedEffect(Unit) {
-            // Trigger the animation after a small delay
             delay(1000)
             scale.value = 1.5f
-            //  navController.navigate("Home Screen")
         }
 
-        Box(modifier = Modifier.fillMaxSize().background(Color.Black), contentAlignment = Alignment.Center
+        Box(modifier = Modifier
+            .fillMaxSize()
+            .background(Color.Black), contentAlignment = Alignment.Center
         ) {
             Image(
                 painter = painterResource(id = R.drawable.rick_morty_splash),
-                contentDescription = "App Logo",
+                contentDescription = stringResource(id = R.string.app_logo),
                 modifier = Modifier
                     .size(200.dp)
                     .scale(animatedScale.value),
@@ -85,22 +82,7 @@ fun BannerScreen(navController: NavHostController) {
             verticalArrangement = Arrangement.Bottom,
             horizontalAlignment = Alignment.CenterHorizontally
         ) {
-          /*  val offset = Offset(10.0f, 10f)
-            Text(
-                text = stringResource(id = R.string.welcome_to_the_rick_and_morty),
-                modifier.padding(vertical = 25.dp),
-                fontWeight = FontWeight.Bold,
-                color = Color.Black,
-                style = TextStyle(
-                    fontSize = 22.sp,
-                    shadow = Shadow(
-                        color = Color(0xFFffffff),
-                        offset = offset, blurRadius = 3f
-                    ),
-                    fontFamily = FontFamily(Font(R.font.cinzel_decorative)),
-                    textAlign = TextAlign.Center
-                )
-            )*/
+
             val linearGradientBrush = Brush.linearGradient(
                 colors = listOf(
                     Color(0xFFede658),
@@ -117,12 +99,15 @@ fun BannerScreen(navController: NavHostController) {
                     .padding(bottom = 55.dp, start = 20.dp, end = 20.dp)
                     .fillMaxWidth()
                     .background(color = Color.Gray.copy(0.8f), RoundedCornerShape(16.dp))
-                    .border(BorderStroke(3.dp, linearGradientBrush), shape = RoundedCornerShape(16.dp)),
+                    .border(
+                        BorderStroke(3.dp, linearGradientBrush),
+                        shape = RoundedCornerShape(16.dp)
+                    ),
                 colors = ButtonDefaults.buttonColors(
                     containerColor = Color.Black
                 )
             ) {
-                Text(text = "Get In" ,style = TextStyle(
+                Text(text = stringResource(id = R.string.get_in) ,style = TextStyle(
                     fontSize = 25.sp,
                     fontWeight = FontWeight.Bold,
                     color = Color.White,
